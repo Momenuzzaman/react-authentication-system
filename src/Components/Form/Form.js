@@ -27,8 +27,12 @@ function GridComplexExample() {
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 const user = result.user
+                setError('')
                 console.log(user)
             })
+            .catch((error) => {
+                setError(error.message)
+            });
         console.log(email, password)
     }
     const handleEmailChange = event => {
