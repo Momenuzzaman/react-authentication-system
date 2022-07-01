@@ -10,9 +10,15 @@ firebaseAuthentication();
 function GridComplexExample() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
 
     const handleRegistration = event => {
+        event.preventDefault()
+        if (password.length < 6) {
+            setError('Password Must be at least 6 characters long')
+            return;
+        }
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
@@ -20,7 +26,6 @@ function GridComplexExample() {
                 console.log(user)
             })
         console.log(email, password)
-        event.preventDefault()
     }
     const handleEmailChange = event => {
         setEmail(event.target.value)
@@ -43,6 +48,7 @@ function GridComplexExample() {
                     <Form.Control onBlur={handlePasswordChang} type="password" placeholder="Password" required />
                 </Form.Group>
             </Row>
+            <h6 className="text-danger">{error}</h6>
             <Button variant="primary" type="submit">
                 Register
             </Button>
