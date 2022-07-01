@@ -1,18 +1,21 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 function GridComplexExample() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const handleRegistration = event => {
-        console.log("submit")
+        console.log(email, password)
         event.preventDefault()
     }
     const handleEmailChange = event => {
-        console.log(event.target.value)
+        setEmail(event.target.value)
     };
     const handlePasswordChang = event => {
-        console.log(event.target.value)
+        setPassword(event.target.value)
     }
 
     return (
