@@ -19,6 +19,10 @@ function GridComplexExample() {
             setError('Password Must be at least 6 characters long')
             return;
         }
+        if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
+            setError('Password Must contain 2 upper case')
+            return;
+        }
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
