@@ -1,26 +1,32 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
-const Form = () => {
+function GridComplexExample() {
     const handleRegistration = event => {
         console.log("submit")
         event.preventDefault()
     }
-    return (
-        <div>
-            <h3>Please Register</h3>
-            <form onSubmit={handleRegistration}>
-                <label htmlFor='email'>Email : </label>
-                <input type="text" name="email" placeholder="enter your email" />
-                <br />
-                <br />
-                <label htmlFor='password'>Password : </label>
-                <input type="password" name="password" placeholder="password"></input>
-                <br />
-                <input type="submit" value="Register" />
-            </form>
-        </div>
-    );
-};
 
-export default Form;
+    return (
+        <Form onSubmit={handleRegistration}>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+            </Row>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
+    );
+}
+
+export default GridComplexExample;
