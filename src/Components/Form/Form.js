@@ -11,6 +11,7 @@ function GridComplexExample() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
 
 
     const handleRegistration = event => {
@@ -41,6 +42,9 @@ function GridComplexExample() {
     const handlePasswordChang = event => {
         setPassword(event.target.value)
     }
+    const toggle = event => {
+        setIsLogin(event.target.checked);
+    }
 
     return (
         <Form onSubmit={handleRegistration}>
@@ -50,11 +54,15 @@ function GridComplexExample() {
                     <Form.Label>Email</Form.Label>
                     <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" required />
                 </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control onBlur={handlePasswordChang} type="password" placeholder="Password" required />
+                    <input onChange={toggle} type="checkbox" className="form-check-input" id="grideCheck1"></input>
+                    <label className="form-check-label" htmlFor="grideCheck1">
+                        {isLogin ? "Please Login" : "Already Register?"}
+                    </label>
                 </Form.Group>
+
             </Row>
             <h6 className="text-danger">{error}</h6>
             <Button variant="primary" type="submit">
