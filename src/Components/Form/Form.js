@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseAuthentication from '../../firebase/initializeApp';
 firebaseAuthentication();
 
@@ -25,16 +25,24 @@ function GridComplexExample() {
             return;
         }
         const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((result) => {
+        const createNewUser = (email, password) => {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((result) => {
+                    const user = result.user
+                    setError('')
+                    console.log(user)
+                })
+                .catch((error) => {
+                    setError(error.message)
+                });
+        }
+    }
+    const loginUser = (email, password) => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
                 const user = result.user
-                setError('')
-                console.log(user)
             })
-            .catch((error) => {
-                setError(error.message)
-            });
-        console.log(email, password)
     }
     const handleEmailChange = event => {
         setEmail(event.target.value)
