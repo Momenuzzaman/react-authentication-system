@@ -48,7 +48,7 @@ function GridComplexExample() {
 
     return (
         <Form onSubmit={handleRegistration}>
-            <h3 className="text-primary">Please register</h3>
+            <h3 className="text-primary">{isLogin ? "Please Login" : "Please register"}</h3>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
@@ -66,7 +66,7 @@ function GridComplexExample() {
             </Row>
             <h6 className="text-danger">{error}</h6>
             <Button variant="primary" type="submit">
-                Register
+                {isLogin ? "Login" : "Register"}
             </Button>
         </Form>
     );
