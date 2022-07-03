@@ -45,6 +45,9 @@ function GridComplexExample() {
                 const user = result.user
                 console.log(user);
             })
+            .catch((error) => {
+                setError(error.message)
+            });
     }
 
     const handleEmailChange = event => {
