@@ -24,26 +24,29 @@ function GridComplexExample() {
             setError('Password Must contain 2 upper case')
             return;
         }
-        const auth = getAuth();
-        const createNewUser = (email, password) => {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((result) => {
-                    const user = result.user
-                    setError('')
-                    console.log(user)
-                })
-                .catch((error) => {
-                    setError(error.message)
-                });
-        }
+
+        isLogin ? loginUser(email, password) : createNewUser(email, password)
+    }
+    const auth = getAuth();
+    const createNewUser = (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                const user = result.user
+                setError('')
+                console.log(user)
+            })
+            .catch((error) => {
+                setError(error.message)
+            });
     }
     const loginUser = (email, password) => {
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user
+                console.log(user);
             })
     }
+
     const handleEmailChange = event => {
         setEmail(event.target.value)
     };
