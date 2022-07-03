@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import firebaseAuthentication from '../../firebase/initializeApp';
 firebaseAuthentication();
 
@@ -34,6 +34,7 @@ function GridComplexExample() {
                 const user = result.user
                 setError('')
                 console.log(user)
+                emailVerification();
             })
             .catch((error) => {
                 setError(error.message)
@@ -44,9 +45,16 @@ function GridComplexExample() {
             .then(result => {
                 const user = result.user
                 console.log(user);
+                setError('')
             })
             .catch((error) => {
                 setError(error.message)
+            });
+    }
+    const emailVerification = () => {
+        sendEmailVerification(auth.currentUser)
+            .then((result) => {
+                console.log(result);
             });
     }
 
